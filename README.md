@@ -1,2 +1,30 @@
-# matsim_wofe
- a verion of matsim for the west of england
+## Overview
+
+A working example of how to create a matsim population file.
+
+The output is a xml file that can be used with matsim software.  
+- Produces a population for the West of England Area.  
+- To run a MATSim simulation you will aslo need a network file and a
+config file. - Additional files such as public transport schedules can
+also be used. - See matsim.org for details on how to use abm framework.
+
+## Initial data requirements
+
+#### Census csv data:
+
+-   age profile
+-   car availability
+-   economic activity
+-   ethnicity
+-   industry
+
+## Main R scripts
+
+### 1. pop\_profile.R
+
+This takes the census csv data and creates a summary data frame
+containing the demographic attributes for each output area. In addition
+the data frame contains an attribute for each plan type. Each OA has a
+tally for the number of agents assigned to each plan type.
+
+## Helper scripts
