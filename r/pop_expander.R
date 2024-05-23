@@ -35,17 +35,13 @@ source("r/help_name_gen.R")
 pop <- pop %>% mutate(agentName = suppressWarnings(nameGenX(nrow(pop))))
 pop <- pop %>% select(agentName,OA,planType)
 
-#just yate pop
-# yateOAs <- read.csv("csv/yateOAs.csv")
-# yateOAs <- yateOAs$OA11CD
-# yatePop <- pop %>% filter(OA %in% yateOAs)
-# rm(yateOAs)
 
 #select OAs (filter out some of the 3490 OAs)
- myOAs <- read.csv("csv/bus_6and7_OAs.csv")
- myOAs <- myOAs$OA11CD
- bus6or7pop <- pop %>% filter(OA %in% myOAs)
- rm(myOAs)
+ sample_oas <- read.csv("csv/sample_oa/yateOAs.csv")  # either sample of Yate OAs or...
+ #sample_oas <- read.csv("csv/sample_oa/bus_6and7.csv") # ...sample of OAs from bus routes 6 and 7
+ sample_oas <- sample_oas$OA11CD
+ sample_oa_pop <- pop %>% filter(OA %in% sample_oas)
+ rm(sample_oas)
 
 
 rm(threeLetNames, alphaNumerics, profileTypes, agentNameGen, agentNameGen2, agentNameGenAlphaNum, popExpander, 
@@ -54,6 +50,8 @@ rm(threeLetNames, alphaNumerics, profileTypes, agentNameGen, agentNameGen2, agen
 ###################
 # profile sums df #
 ###################
+
+# this creates a df of counts of agents who have each profile type
 
 profileSums <- profileTypeDF %>% select(-OA, -starts_with("dem."), -starts_with("workplace.")) %>% 
   mutate(total = rowSums(.))
