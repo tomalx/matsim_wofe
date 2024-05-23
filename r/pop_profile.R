@@ -9,18 +9,18 @@
 # This script should be run prior to the popExpander script.
 
 
-setwd("~/matsim/dataPrep/population")
+setwd("~/matsim/on_github/matsim_wofe")
 
 ###################
 # load nomis data #
 ###################
 
-industry <- read.csv("nomis/industry.csv") %>% rename(OA = X2011.output.area)
-age <- read.csv("nomis/age.csv") %>% rename(OA = X2011.output.area)
-ecoAct <- read.csv("nomis/economicActivity.csv") %>% rename(OA = X2011.output.area)
+industry <- read.csv("csv/industry.csv") %>% rename(OA = X2011.output.area)
+age <- read.csv("csv/age.csv") %>% rename(OA = X2011.output.area)
+ecoAct <- read.csv("csv/economicActivity.csv") %>% rename(OA = X2011.output.area)
 #occupation <- read.csv("nomis/occupations.csv") %>% rename(OA = X2011.output.area)
-carAvail <- read.csv("nomis/carAvailability.csv") %>% rename(OA = homeOA)
-ethnicity <- read.csv("nomis/ethnicity.csv")
+carAvail <- read.csv("csv/carAvailability.csv") %>% rename(OA = homeOA)
+ethnicity <- read.csv("csv/ethnicity.csv")
 
 #industry.num <- industry[,-1]
 #colSums(industry.num)
