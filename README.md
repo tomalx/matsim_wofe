@@ -25,6 +25,25 @@ also be used. - See matsim.org for details on how to use abm framework.
 This takes the census csv data and creates a summary data frame
 containing the demographic attributes for each output area. In addition
 the data frame contains an attribute for each plan type. Each OA has a
-tally for the number of agents assigned to each plan type.
+tally for the number of agents assigned to each plan type. The resulting
+data frame is called profileTypeDF.
+
+### 2. pop\_expander.R
+
+The second script that is used to create the population xml file is the
+pop\_expander script. This script takes the profileTypeDF data frame and
+expands it out to create a longer data frame with each row corresponding
+to an agent. The script also requires a random name generator function
+to create unique agent names.
+
+The script also allows you to sample a subset of the OAs to create a
+smaller population file. This is useful for testing purposes.
+
+(A tally of the number of agents who have each profile type is also
+created.)
 
 ## Helper scripts
+
+### help\_name\_gen.R
+
+Various functions to generate random names for agents.
