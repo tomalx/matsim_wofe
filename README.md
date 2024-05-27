@@ -42,6 +42,15 @@ smaller population file. This is useful for testing purposes.
 (A tally of the number of agents who have each profile type is also
 created.)
 
+### 3. pop\_plans.R
+
+This script builds on the population data frame created in the previous
+two scripts. Each row in the data frame (which corresponds to an agent)
+is assigned a plan based upon their work profile type. There are over 30
+different functions, each of which uses a different algorithm to assign
+the agents to a plan. The plan is made up of activity locations and
+times.
+
 ## Helper scripts
 
 ### help\_name\_gen.R
