@@ -31,7 +31,7 @@ popExpander <- function(){
 pop <- popExpander()
 
 
-source("r/help_name_gen.R")
+source("r/help_fun/help_name_gen.R")
 pop <- pop %>% mutate(agentName = suppressWarnings(nameGenX(nrow(pop))))
 pop <- pop %>% select(agentName,OA,planType)
 

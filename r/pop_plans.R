@@ -4,16 +4,17 @@ library(parallel)
 
 
 
-setwd("~/matsim/dataPrep/population")
+setwd("~/matsim/on_github/matsim_wofe")
 
 
-source("rScript/profiles/profile2.R")
-source("rScript/profiles/expander2.R")
+source("r/pop_profile.R")
+source("r/pop_expander.R")
 
-load("bus6or7popEnv.RData")
+#load("sample_yate_pop.RData")
+#load("sample_bus6or7_pop.RData")
 
-sampleSize  <- 5000
-pop <- bus6or7pop
+sampleSize  <- 5000     #for testing set smaller pop sample size
+#pop <- sample_oa_pop     # or use an Output Area sample (e.g. Yate OAs or OAs on bus route 6 or 7)
 myPop <- sample_n(pop, sampleSize)  # get a sample pop
 #myPop <- myPop %>% mutate(Act.1 = NA, Act.2 = NA, Act.3 = NA, Act.4 = NA, Act.5 = NA, Act.6 = NA, Act.7= NA, Act.8= NA, Act.9= NA, Act.10= NA)
 
@@ -21,19 +22,19 @@ myPop <- sample_n(pop, sampleSize)  # get a sample pop
 #source("rScript/routines/planFunctions/plans_INDY.R")
 #source("rScript/routines/planFunctions/plans_OFFC.R")
 
-source("rScript/routines/helperFunctions/addHomeXY.R")
-source("rScript/routines/helperFunctions/addWorkXY.R")
-source("rScript/routines/helperFunctions/addTimes.R")
-source("rScript/routines/helperFunctions/addAttrs.R")
-source("rScript/routines/helperFunctions/loadPointData.R")
+source("r/help_fun/addHomeXY.R")
+source("r/help_fun/addWorkXY.R")
+source("r/help_fun/addTimes.R")
+source("r/help_fun/addAttrs.R")
+source("r/help_fun/loadPointData.R")
 
-source('rScript/routines/planFunctions/lapply_INDY.R')
-source('rScript/routines/planFunctions/lapply_OFFC.R')
-source('rScript/routines/planFunctions/lapply_HIGH.R')
-source('rScript/routines/planFunctions/lapply_HLTH.R')
-source('rScript/routines/planFunctions/lapply_EDUC.R')
-source('rScript/routines/planFunctions/lapply_CONS.R')
-source('rScript/routines/planFunctions/lapply_NOWK.R')
+source('r/plan_fun/lapply_INDY.R')
+source('r/plan_fun/lapply_OFFC.R')
+source('r/plan_fun/lapply_HIGH.R')
+source('r/plan_fun/lapply_HLTH.R')
+source('r/plan_fun/lapply_EDUC.R')
+source('r/plan_fun/lapply_CONS.R')
+source('r/plan_fun/lapply_NOWK.R')
 
 
 # NB will take approx. 3 hours to run this loop for 500k population
@@ -134,7 +135,7 @@ myPop2 <- mutate(myPop2,
 
 
 # Save an object to a file
-saveRDS(myPop2, file = "rScript/xmlTree/bus6or7_5k.rds")
+saveRDS(myPop2, file = "pop_data_frame/pop_5000.rds")
 
 
 

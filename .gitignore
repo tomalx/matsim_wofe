@@ -1,0 +1,6 @@
+
+# see https://github.com/github/gitignore for .gitignore templates
+
+# ignore the home_points shp files (too big for github) - use HOME_points.csv instead
+
+shp\homePoints.*

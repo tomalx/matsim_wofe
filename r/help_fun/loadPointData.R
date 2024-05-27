@@ -3,11 +3,11 @@
 
 library(sf)
 
-EDUC_points <- read_sf("shp/landuse/education/EDUC_points.shp")
-HLTH_points <- read_sf("shp/landuse/health/HLTH_points.shp")
-OFFC_points <- read_sf("shp/landuse/office/OFFC_points.shp")
-INDY_points <- read_sf("shp/landuse/industrial/INDY_points.shp")
-HIGH_points <- read_sf("shp/landuse/retail/HIGH_points.shp")
+EDUC_points <- read_sf("shp/EDUC_points.shp")
+HLTH_points <- read_sf("shp/HLTH_points.shp")
+OFFC_points <- read_sf("shp/OFFC_points.shp")
+INDY_points <- read_sf("shp/INDY_points.shp")
+HIGH_points <- read_sf("shp/HIGH_points.shp")
 
 #function to import and format shp file
 #for work points
@@ -30,7 +30,7 @@ WORK_points <- WORK_points %>% mutate(pointRef = paste0("wp_",row_number()))
 WORK_points <- WORK_points %>% mutate(X = round(X), Y = round(Y))
 
 
-HOME_points <- read_sf("shp/landuse/homePoints.shp")
+HOME_points <- read_sf("shp/homePoints.shp")
 data <- st_set_geometry(HOME_points, NULL) %>% select(homeOA = OA11CD)
 HOME_points <- as_tibble(st_coordinates(HOME_points)) %>% cbind(data)
 rm(data)
@@ -43,7 +43,7 @@ HOME_points <- sample_n(HOME_points, 100000)
 #HOME_points <- st_as_sf(HOME_points, coords = c("X","Y"), crs=27700)
 #mapview(HOME_points)
 
-LEISURE_points <- read_sf("shp/landuse/leisure/LEISURE_points.shp")
+LEISURE_points <- read_sf("shp/LEISURE_points.shp")
 data <- st_set_geometry(LEISURE_points, NULL) %>% select(type)
 LEISURE_points <- as_tibble(st_coordinates(LEISURE_points)) %>% cbind(data)
 LEISURE_points <- LEISURE_points %>% mutate(pointRef = paste0("lp_",row_number()))
@@ -54,7 +54,7 @@ rm(data)
 # load flow data
 ##################
 
-flowData <- read.csv("nomis/OD_OAhome_MSOAwork_withinWofEonly.csv")
+flowData <- read.csv("csv/flow/OD_OAhome_MSOAwork_withinWofEonly.csv")
 flowData <- flowData %>% pivot_longer(!OA, names_to = "workMSOA", values_to = "count")
 OAtotalFlow <- flowData %>% group_by(OA) %>% summarise(total = sum(count))
 flowData <- left_join(flowData, OAtotalFlow, by = "OA")
