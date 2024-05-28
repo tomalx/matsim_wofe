@@ -49,4 +49,14 @@ This script builds on the population data frame created in the previous two scri
 ### help_name_gen.R
 Various functions to generate random names for agents.
 
+### addAttrs.R
+
+### addHomeXY.R
+
+### addWorkXY.R
+
+### addTimes.R
+
+### loadPointData.R
+
 
