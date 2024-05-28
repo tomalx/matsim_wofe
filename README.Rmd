@@ -58,5 +58,6 @@ Various functions to generate random names for agents.
 ### addTimes.R
 
 ### loadPointData.R
+Loads the point data that will be used activity locations for the agents.
 
 
