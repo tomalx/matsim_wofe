@@ -1,19 +1,23 @@
 library(tidyverse)
 library(tictoc)
 library(parallel)
+library(VGAM)
+library(hms)
+library(sf)
 
 
 
-setwd("~/matsim/on_github/matsim_wofe")
+#setwd("~/matsim/on_github/matsim_wofe")
+#setwd("C:/Users/tom.alexander1/OneDrive - West Of England Combined Authority/Transport/7.0 Data/MATsim/matsim_wofe")
 
 
-source("r/pop_profile.R")
-source("r/pop_expander.R")
+#source("r/pop_profile.R")   # if not already run
+#source("r/pop_expander.R")  # if not already run
 
 #load("sample_yate_pop.RData")
 #load("sample_bus6or7_pop.RData")
 
-sampleSize  <- 5000     #for testing set smaller pop sample size
+sampleSize  <- 1000     #for testing set smaller pop sample size
 #pop <- sample_oa_pop     # or use an Output Area sample (e.g. Yate OAs or OAs on bus route 6 or 7)
 myPop <- sample_n(pop, sampleSize)  # get a sample pop
 #myPop <- myPop %>% mutate(Act.1 = NA, Act.2 = NA, Act.3 = NA, Act.4 = NA, Act.5 = NA, Act.6 = NA, Act.7= NA, Act.8= NA, Act.9= NA, Act.10= NA)
@@ -53,6 +57,49 @@ source('r/plan_fun/lapply_NOWK.R')
 #myPopTest <- lapply(myPopTest,INDY_3_fun)
 #myPopTest <- lapply(myPopTest,INDY_4_fun)
 #toc()
+tic("just lapply")
+myPopList <- split(myPop, seq(nrow(myPop)))
+myPop_with_acts <- lapply(myPopList,addAttrsLoop)
+myPop_with_acts <- lapply(myPop_with_acts,addHomeLoop)
+myPop_with_acts <- lapply(myPop_with_acts,INDY_1_fun)
+myPop_with_acts <- lapply(myPop_with_acts,INDY_2_fun)
+myPop_with_acts <- lapply(myPop_with_acts,INDY_3_fun)
+myPop_with_acts <- lapply(myPop_with_acts,INDY_4_fun)
+myPop_with_acts <- lapply(myPop_with_acts,OFFC_1_fun)
+myPop_with_acts <- lapply(myPop_with_acts,OFFC_2_fun)
+myPop_with_acts <- lapply(myPop_with_acts,OFFC_3_fun)
+myPop_with_acts <- lapply(myPop_with_acts,OFFC_4_fun)
+myPop_with_acts <- lapply(myPop_with_acts,OFFC_5_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HIGH_1_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HIGH_2_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HIGH_3_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HIGH_4_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HLTH_1_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HLTH_2_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HLTH_3_fun)
+myPop_with_acts <- lapply(myPop_with_acts,HLTH_4_fun)
+myPop_with_acts <- lapply(myPop_with_acts,EDUC_1_fun)
+myPop_with_acts <- lapply(myPop_with_acts,EDUC_2_fun)
+myPop_with_acts <- lapply(myPop_with_acts,EDUC_3_fun)
+myPop_with_acts <- lapply(myPop_with_acts,EDUC_4_fun)
+myPop_with_acts <- lapply(myPop_with_acts,CONS_1_fun)
+myPop_with_acts <- lapply(myPop_with_acts,CONS_2_fun)
+myPop_with_acts <- lapply(myPop_with_acts,CONS_3_fun)
+myPop_with_acts <- lapply(myPop_with_acts,NOWK_1_fun)
+myPop_with_acts <- lapply(myPop_with_acts,NOWK_2_fun)
+myPop_with_acts <- lapply(myPop_with_acts,NOWK_3_fun)
+myPop_with_acts <- lapply(myPop_with_acts,NOWK_4_fun)
+myPop_with_acts <- lapply(myPop_with_acts,NOWK_5_fun)
+myPop_with_acts <- lapply(myPop_with_acts,NOWK_6_fun)
+
+
+myPop_with_acts <- as.data.frame(do.call(rbind, myPop_with_acts))
+toc()
+
+# 250 - 89.3 secs
+# 1000 - 322.3 secs
+
+
 
 ################# OPTION2: PARALLEL ###############################
 

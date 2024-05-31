@@ -15,8 +15,9 @@ addHomeLoop <- function(agent.row){
   agentOApoints <- filter(HOME_points, homeOA == agent$OA) # add another filter here for different agent plan routines
   agentHome <- sample(agentOApoints$pointRef, 1) 
   agentHome <- HOME_points %>% filter(pointRef == agentHome)
-  agentHome <- cbind(agent,agentHome)
-  agentHome <- agentHome %>% select(-c("pointRef","homeOA"))
+  #agentHome <- cbind(agent,agentHome)
+  agentHome <- bind_cols(agent,agentHome %>% select(X,Y))
+  #agentHome <- agentHome %>% select(-c("pointRef","homeOA","X.1"))
   agentHome <- agentHome %>% rename("home.X"=X , "home.Y"=Y) 
   }
 
@@ -43,6 +44,34 @@ addHomeList <- function(agent.row){
 
 #myPopTest <- lapply(myPopList, addHome)
 #myPopTest[1]
+
+
+################################################################################
+# map version of function to add home location (X & Y grid ref) for each agent #
+################################################################################
+
+#myPopList <- split(myPop, seq(nrow(myPop))) 
+
+#agent.row <- myPop[5,]
+
+addHomeRowwise <- function(pop_df){
+  
+  pop <- myPop %>% rowwise(OA) %>% sample_n(HOME_points) %>%   mutate(pointRef = sample(HOME_points[HOME_points$homeOA == OA,]$pointRef,1))
+  
+  
+  myOA <- agent.row[["OA"]]
+  myHomePoint <- HOME_points[HOME_points$homeOA == myOA,]
+  myHomePoint <- sample_n(myHomePoint,1)
+  agent.row <- cbind(agent.row,myHomePoint)
+  agent.row <- agent.row %>% select("agentName","OA","planType","X","Y",starts_with("attr."))
+  #agent.row <- agent.row[,c("agentName","OA","planType","X","Y",starts_with("attr."))]
+  agent.row <- agent.row %>% rename("home.X"=X , "home.Y"=Y)
+}
+
+#myPopTest <- lapply(myPopList, addHome)
+#myPopTest[1]
+
+
 #########################################
 # FAKE (obsolete) - keep for reference? #
 #########################################

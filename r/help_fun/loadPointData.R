@@ -30,7 +30,7 @@ WORK_points <- WORK_points %>% mutate(pointRef = paste0("wp_",row_number()))
 WORK_points <- WORK_points %>% mutate(X = round(X), Y = round(Y))
 
 HOME_points <- read.csv("csv/HOME_points.csv")
-
+HOME_points <- HOME_points %>% select(-X.1)
 
 # HOME_points <- read_sf("shp/homePoints.shp")
 # data <- st_set_geometry(HOME_points, NULL) %>% select(homeOA = OA11CD)

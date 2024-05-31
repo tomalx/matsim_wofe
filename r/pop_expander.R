@@ -44,8 +44,8 @@ pop <- pop %>% select(agentName,OA,planType)
  rm(sample_oas)
 
 
-rm(threeLetNames, alphaNumerics, profileTypes, agentNameGen, agentNameGen2, agentNameGenAlphaNum, popExpander, 
-   alphaNumSmall, nameGenX, agentNameGenSimple1, agentNameGenSimple2, constonants, vowels)
+ rm(threeLetNames, alphaNumerics, profileTypes, agentNameGen, agentNameGen2, agentNameGenAlphaNum, popExpander, 
+    alphaNumSmall, nameGenX, agentNameGenSimple1, agentNameGenSimple2, constonants, vowels)
 
 ###################
 # profile sums df #

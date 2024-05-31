@@ -9,7 +9,8 @@
 # This script should be run prior to the popExpander script.
 
 
-setwd("~/matsim/on_github/matsim_wofe")
+#setwd("~/matsim/on_github/matsim_wofe")
+#setwd("C:/Users/tom.alexander1/OneDrive - West Of England Combined Authority/Transport/7.0 Data/MATsim/matsim_wofe")
 
 ###################
 # load nomis data #
