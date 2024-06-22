@@ -52,5 +52,8 @@ times_distribution_plot <- function(times_df, palette = NULL, bin_width_mins = 1
 
 times_distribution_plot(times_df, "PuRd")
 times_distribution_plot(times_df, bin_width_mins = 10)
-times_distribution_plot(times_df, bin_width_mins = 15, title = "distribution of activity start times")
+times_distribution_plot(times_df, bin_width_mins = 2, title = "distribution of activity start times")
 
+
+pop_5000 %>% filter(planType %in% c("OFFC_1", "OFFC_2", "OFFC_3")) %>% pull(Act.1.End) %>% as.numeric() %>% 
+  times_distribution_plot(bin_width_mins = 5, title = "Distribution of home end time for office workers")
